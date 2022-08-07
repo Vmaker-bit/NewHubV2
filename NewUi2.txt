@@ -1,41 +1,26 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/slf0Dev/Ocerium_Project/main/Library.lua"))()
-Window = Library.Main("Nigger","A")
+local DeveloperMode = false
+Lofi = {}
 
---//tab
-local Tab = Window.NewTab("BloxFruit")
+function Lofi.require(path)
+    if type(path) == "string" then
+    	if DeveloperMode then
+	  return loadfile(path)()
+	else
+    	  path = path:gsub("\\", "/")
+          return loadstring(game:HttpGet("https://raw.githubusercontent.com/LAOnGithub/Lofi-UI/master/"..path, true))()
+	end
+    elseif type(path) == "number" then
+        return loadstring(game:GetObjects(path)[1].Source)()
+    end
+end
 
-
---//section
-local Section = Tab.NewSection("Bloxfruit")
-
---// Button
-local Button = Section.NewButton("RipperHub",function()
-    _G.Color = Color3.fromRGB(52, 190, 255)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/hajibeza/RIPPER-HUB/main/NEWBF.lua"))()
+Lofi.require("Lofi\\Main.lua")
+local Window = Lofi:Window()
+local Test = Window:Tile("T", "Test")
+local Groupbox = Test:Groupbox(UDim2.new(0, 25, 0, 70), UDim2.new(0, 350, 0, 300), "Groupbox")
+Groupbox:Checkbox("Checkbox", function(Value)
+	print("Checkbox: Value changed to: " .. tostring(Value))
 end)
-local button = Section.NewButton("Newhub" ,function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptpastebin/raw/main/Xeter"))()
-end)
-local button = Section.NewButton("ThunderZ" ,function()
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/ThunderZ-05/HUB/main/Script"))()
-end)
-
---New
-local Tab = Window.NewTab("Fighting Style")
-local FsSection = Tab.NewSection("FightingStyle")
-
-local button = FsSection.NewButton("DeathStep" ,function()
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDeathStep")
-end)
-local button = FsSection.NewButton("Superhuman" ,function()
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
-end)
-local button = FsSection.NewButton("DragonTalon" ,function()
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDragonTalon")
-end)
-local button = FsSection.NewButton("SharkmanKarate" ,function()
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate")
-end)
-local button = FsSection.NewButton("E-Claw" ,function()
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectricClaw")
+Groupbox:Button("Button", function()
+	print("Button: pressed")
 end)
