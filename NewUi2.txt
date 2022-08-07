@@ -1,26 +1,10 @@
-local DeveloperMode = false
-Lofi = {}
+local library = loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/0x"))()
 
-function Lofi.require(path)
-    if type(path) == "string" then
-    	if DeveloperMode then
-	  return loadfile(path)()
-	else
-    	  path = path:gsub("\\", "/")
-          return loadstring(game:HttpGet("https://raw.githubusercontent.com/LAOnGithub/Lofi-UI/master/"..path, true))()
-	end
-    elseif type(path) == "number" then
-        return loadstring(game:GetObjects(path)[1].Source)()
-    end
-end
+local w1 = library:Window("a") -- Text
 
-Lofi.require("Lofi\\Main.lua")
-local Window = Lofi:Window()
-local Test = Window:Tile("T", "Test")
-local Groupbox = Test:Groupbox(UDim2.new(0, 25, 0, 70), UDim2.new(0, 350, 0, 300), "Groupbox")
-Groupbox:Checkbox("Checkbox", function(Value)
-	print("Checkbox: Value changed to: " .. tostring(Value))
-end)
-Groupbox:Button("Button", function()
-	print("Button: pressed")
-end)
+w1:Button(
+    "Print Hi",
+    function()
+        print("Hi")
+    end)
+ -- Text, Callback
